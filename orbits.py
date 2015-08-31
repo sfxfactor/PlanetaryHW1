@@ -42,7 +42,7 @@ def calcObs(p):
     Z = r*np.sin(w+f)*np.sin(i)
 
     #position angle west of north
-    PA = np.arctan2(-Y,X)
+    PA = np.arctan2(Y,X) % (2.*np.pi)
     sep = np.sqrt(X**2+Y**2)
 
     R1 = (m2/(m1+m2))*sep
