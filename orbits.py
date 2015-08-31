@@ -23,7 +23,7 @@ def calcObs(p):
 
     P = np.sqrt((4.*a**3*np.pi**2)/(G*(m1+m2)))
 
-    M = 2*np.pi*t/P
+    M = 2*np.pi*t/P % (2.*np.pi)
 
     #set up transcendental equation and derivative to find eccentric anomaly
     def g(E):
