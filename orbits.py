@@ -2,7 +2,7 @@ import numpy as np
 
 G = 6.67259e-8 #Gravitational constant (cm^3/g/s^2)
 
-def calcObs(p):
+def calcObs(p,t):
     ''' Calculates observables from orbital parameters.
     returns array of observables [sep, PA, R1, PA1, R2, PA2, RV].
     Rx and PAx are the seperation (in the same units as a) with respect to the barycenter.
@@ -14,7 +14,7 @@ def calcObs(p):
     '''
 
     #pull out orbital parameters
-    t = p[0]
+    t0 = p[0]
     a = p[1]
     e = p[2]
     i = p[3]
@@ -25,7 +25,7 @@ def calcObs(p):
 
     P = np.sqrt((4.*a**3*np.pi**2)/(G*(m1+m2)))
 
-    M = 2*np.pi*t/P % (2.*np.pi)
+    M = 2*np.pi*(t-t0)/P % (2.*np.pi)
 
     #set up transcendental equation and derivative to find eccentric anomaly
     def g(E):
