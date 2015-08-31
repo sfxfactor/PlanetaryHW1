@@ -1,5 +1,8 @@
-# temp files
+## temp files
 *~
+
+## python files
+*.pyc
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
