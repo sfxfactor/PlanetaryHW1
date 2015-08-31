@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 import orbits as orb
 
 AU = 1.49597871e13 #cm
@@ -23,13 +24,10 @@ t2 = 2457387. #JD of Dec 31 2015
 
 #calculate range of time in seconds
 ts = (np.arange(t1,t2)-Tperi)*Day
-print ts
 
-Rvs=np.array([])
+p=[ts,a,e,i,W,w,m1,m2]
+obs=orb.calcObs(p)
+Rvs=obs[6]
+#Rvs=np.append(Rvs,Rv)
 
-for t in ts:
-    p=[t,a,e,i,W,w,m1,m2]
-    obs=orb.calcObs(p)
-    Rv=obs[6]
-    Rvs=np.append(Rvs,Rv)
-print Rvs
+plt.plot(ts,Rvs)

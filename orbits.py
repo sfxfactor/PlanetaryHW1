@@ -29,7 +29,7 @@ def calcObs(p):
     def g(E):
         return E-e*np.sin(E)-M
     def gp(E):
-        return -e*np.cos(E)
+        return 1-e*np.cos(E)
 
     E = NRmethod(g, gp, 1000, M)
     r=a*(1.-e*np.cos(E))
@@ -76,6 +76,7 @@ def NRmethod(f, fp, n, x0):
         xip1 = xi - f(xi)/fp(xi)
         xi=xip1
 
-    print "Found root to precision of ", f(xip1)
+    if f(xip1) > 0.1:
+        print "### WARNING: found root to be ", f(xip1)
     return xip1
 
