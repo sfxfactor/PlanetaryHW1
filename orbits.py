@@ -4,6 +4,8 @@ G = 6.67259e-8 #Gravitational constant (cm^3/g/s^2)
 
 def calcObs(p):
     ''' Calculates observables from orbital parameters.
+    returns array of observables [sep, PA, R1, PA1, R2, PA2, RV].
+    Rx and PAx are the seperation (in the same units as a) with respect to the barycenter.
     :param p:
     array of orbital parameters. [t, a, e, i, W, w, m1, m2]
     assuming t0 = 0
@@ -57,6 +59,7 @@ def calcObs(p):
     
 def NRmethod(f, fp, n, x0):
     ''' Newton Raphson root finding method.
+    returns position of root.
     :param f:
     Function to find the root of.
 
@@ -76,7 +79,7 @@ def NRmethod(f, fp, n, x0):
         xip1 = xi - f(xi)/fp(xi)
         xi=xip1
 
-    if f(xip1) > 0.1:
+    if (f(xip1) > 0.1).any():
         print "### WARNING: found root to be ", f(xip1)
     return xip1
 

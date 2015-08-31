@@ -7,6 +7,8 @@ Msun = 1.989e33 #g
 Mjup = 1.89813e30 #g
 Day = 86164.0916 #seconds in a day
 
+#####Q2
+
 # HD 80606 b orbit parameters from http://exoplanet.eu/catalog/hd_80606_b/#6832
 # updated Aug. 16, 2014
 
@@ -23,11 +25,28 @@ t1 = 2457266. #JD of Sep 1 2015
 t2 = 2457387. #JD of Dec 31 2015
 
 #calculate range of time in seconds
-ts = (np.arange(t1,t2)-Tperi)*Day
+JDs = np.arange(t1,t2,0.001)
+ts = (JDs-Tperi)*Day
 
 p=[ts,a,e,i,W,w,m1,m2]
 obs=orb.calcObs(p)
 Rvs=obs[6]
 #Rvs=np.append(Rvs,Rv)
 
-plt.plot(ts,Rvs)
+plt.plot(JDs ,Rvs/100.)
+plt.xlabel("Julain date [days]")
+plt.ylabel("Radial Velocity [m/s]")
+plt.title("HD 80606 b")
+plt.savefig("Q2.pdf")
+
+plt.clf()
+plt.plot(JDs ,obs[0]/AU)
+plt.xlabel("Julain date [days]")
+plt.ylabel("Projected seperation [AU]")
+plt.title("HD 80606 b")
+print "Minimun projected seperation (transit) on JD "+str(JDs[np.where(obs[0]==np.min(obs[0]))][0])
+plt.savefig("Q3.pdf")
+
+
+
+
