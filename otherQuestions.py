@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import orbits as orb
+from orbit import *
+from scipy.signal import argrelextrema
 
 AU = 1.49597871e13 #cm
 Msun = 1.989e33 #g
@@ -29,7 +30,8 @@ JDs = np.arange(t1,t2,0.001)
 ts = JDs*Day
 
 p=[t0,a,e,i,W,w,m1,m2]
-obs=orb.calcObs(p,ts)
+HD80606b=Orbit(p)
+obs=HD80606b.calcObs(ts)
 Rvs=obs[6]
 #Rvs=np.append(Rvs,Rv)
 
@@ -45,8 +47,7 @@ plt.plot(JDs ,obs[0]/AU)
 plt.xlabel("Julain date [days]")
 plt.ylabel("Projected seperation [AU]")
 plt.title("HD 80606 b")
-print "primary transit on JD "+str(JDs[np.where(obs[6]>0.)][np.where(obs[0]==np.min(obs[0]))])
-print "second transit on JD "+str(JDs[np.where(obs[6]<0.)][np.where(obs[0]==np.min(obs[0]))])
+print "minimum projected seperation on JD "+str(JDs[argrelextrema(obs[0],np.less)])
 plt.savefig("Q3.pdf")
 
 
