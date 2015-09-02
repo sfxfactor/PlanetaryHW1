@@ -22,8 +22,8 @@ w = np.radians(300.651)
 m1 = 0.98 * Msun
 m2 = 3.94 * Mjup
 
-t1 = 2457266. #JD of Sep 1 2015 
-t2 = 2457387. #JD of Dec 31 2015
+t1 = 2457235.5 #JD of Sep 1 2015 
+t2 = 2457387.5 #JD of Dec 31 2015
 
 #calculate range of time in seconds
 JDs = np.arange(t1,t2,0.001)
@@ -41,6 +41,8 @@ plt.xlabel("Julain date [days]")
 plt.ylabel("Radial Velocity [m/s]")
 plt.title("HD 80606 b")
 plt.savefig("Q2.pdf")
+print "Extreme neg vel on: ", JDs[argrelextrema(Rvs,np.less)]
+print "Extreme pos vel on: ", JDs[argrelextrema(Rvs,np.greater)]
 
 plt.clf()
 plt.plot(JDs ,obs[0]/AU)

@@ -8,6 +8,7 @@
 \usepackage{hyperref}
 \usepackage{amssymb}
 \usepackage{epstopdf}
+\usepackage[justification=centering]{caption}
 \DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
 
 \makeatletter
@@ -28,9 +29,9 @@ Code for my model can be found at \url{https://github.com/sfxfactor/PlanetaryHW1
 
 \section{Question 2}
 
-Orbital parameters of HD 80606 b from the literature are presented in Table \ref{tab:orbparams} along with sources.
+Orbital parameters of HD 80606 b from the literature are presented in Table \ref{tab:orbparams} along with sources. A plot of stellar radial velocity (RV) versus time spanning August 1 to December 31, 2015 (JD 2457235.5 to 2457387.5) is shown in Figure \ref{fig:RV}. The maximum and minum RV's occur on the nights of October 16 and 18.
 
-\begin{table}
+\begin{table}[h]
 \begin{center}
     \caption{Orbital Parameters for HD 80606 b }\label{tab:orbparams} 
     \begin {tabular}{lcl}
@@ -49,6 +50,13 @@ Orbital parameters of HD 80606 b from the literature are presented in Table \ref
 \end{center}
 \end{table}
 
+\begin{figure}[h]
+\begin{center}
+    \includegraphics[width=\textwidth]{Q2.pdf}
+    \caption{Radial velocity plot for HD 80606 b from August 1 to December 31, 2015}
+    \label{fig:RV}
+\end{center}
+\end{figure}
 
 \section{Question 3}
 
