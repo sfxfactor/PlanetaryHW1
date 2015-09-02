@@ -19,7 +19,7 @@ class Orbit:
         array of orbital parameters. [t, a, e, i, W, w, m1, m2]
         assuming t0 = 0
         
-        ##### all angles are in radians #####
+        ##### all angles are in radians and all other units are cgs (WHY?!?!) #####
         '''
         
         #pull out orbital parameters
@@ -62,7 +62,7 @@ class Orbit:
     def calcObs(self, t, coords=None):
         ''' Calculates observables from orbital parameters.
         returns array of observables [sep, PA, R1, PA1, R2, PA2, RV].
-        Rx and PAx are the seperation (in the same units as a) with respect to the barycenter.
+        Rx and PAx are the seperation with respect to the barycenter.
         '''
 
         if coords is None:
@@ -80,12 +80,12 @@ class Orbit:
         PA1 = (PA + np.pi) % (2.*np.pi)
         PA2 = PA
 
-        RV = (self.m2*2*np.pi*self.a*np.sin(self.i))/((self.m1+self.m2)*self.P*np.sqrt(1-self.e**2))*(np.cos(self.w+f)+self.e*np.cos(self.w))
+        RVoM = (2*np.pi*self.a*np.sin(self.i))/((self.m1+self.m2)*self.P*np.sqrt(1-self.e**2))*(np.cos(self.w+f)+self.e*np.cos(self.w))
 
         if coords is None:
-            return [sep, PA, R1, PA1, R2, PA2, RV, X, Y, Z, r, f, E, M]
+            return [sep, PA, R1, PA1, R2, PA2, RVoM*self.m2, RVoM*self.m1, X, Y, Z, r, f, E, M]
         else:
-            return np.append([sep, PA, R1, PA1, R2, PA2, RV],coords)
+            return np.append([sep, PA, R1, PA1, R2, PA2, RVoM*self.m2, RVoM*self.m1],coords)
         
 def NRmethod(f, fp, n, x0):
     ''' Newton Raphson root finding method.
