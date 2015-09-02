@@ -1,4 +1,5 @@
-\documentclass[12pt]{article}
+\documentclass[preprint]{aastex}
+\let\captionbox\relax
 \usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
 \geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
 %\geometry{landscape}                % Activate for for rotated page geometry
@@ -9,19 +10,50 @@
 \usepackage{epstopdf}
 \DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
 
+\makeatletter
+\let\@dates\relax
+\makeatother
+
+\citestyle{aa}
+
 \title{Planetary Astrophysics: \\ Homework 1}
 \author{Samuel Factor}
-\date{\today}                                           % Activate to display a given date or no date
+%\date{\today}           % Activate to display a given date or no date
 
 \begin{document}
 \maketitle
+
 \section{Question 1}
 Code for my model can be found at \url{https://github.com/sfxfactor/PlanetaryHW1}. I implemented an \texttt{Orbit} object which stores the orbital parameters and the masses of the two bodies. There are then two methods associated with an \texttt{Orbit} object, \texttt{calcCoord} which, given a time or array of times, calculates the $X$, $Y$, and $Z$ coordinates along with $r$ and the 3 anomaly angles $f$, $E$ and $M$. The second method, \texttt{calcObs} calculates the observables given a time or array of times. This method returns the projected seperation and position angle of the two bodies, the projected seperation and position angle of each body with respect to the center of mass, the radial velocity of both objects as well as the coordinates returned by \texttt{calcCoord}.
+
 \section{Question 2}
+
+Orbital parameters of HD 80606 b from the literature are presented in Table \ref{tab:orbparams} along with sources.
+
+\begin{table}
+\begin{center}
+    \caption{Orbital Parameters for HD 80606 b }\label{tab:orbparams} 
+    \begin {tabular}{lcl}
+    \tableline\tableline
+    Parameter & Value & ref \\
+    $a$ [AU] &  &  \\
+    $e$ & & \\
+    $i$ [deg] & & \\
+    $\Omega$ [deg] & & \\
+    $\omega$ [deg] & & \\
+    $t_0$ [JD] & & \\
+    $M_1$ [M$_\sun$] & & \\
+    $M_2$ [M$_\mathrm{jup}$] & & \\
+    \tableline
+\end{tabular}
+\end{center}
+\end{table}
+
+
 \section{Question 3}
+
 \section{Question 4}
+
 %\subsection{}
-
-
 
 \end{document}  
