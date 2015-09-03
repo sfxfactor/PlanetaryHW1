@@ -57,10 +57,22 @@ plt.title("HD 80606 b")
 plt.savefig("Q3.pdf")
 '''
 
+##### Q3 #####
 f.write("minimum projected seperation on JD {}\n".format(JDs[argrelextrema(obs[0],np.less)]))
 
 rpl = 0.98*Rjup
 rs = 0.978*Rs
-f.write("Contact occurs on JD {}\n".format(JDs[argrelextrema(np.abs(obs[0]-rpl-rs),np.less)]))
+f.write("1/4 contact occurs on JD {}\n".format(JDs[argrelextrema(np.abs(obs[0]-rpl-rs),np.less)]))
+f.write("2/3 Contact occurs on JD {}\n".format(JDs[argrelextrema(np.abs(obs[0]+rpl-rs),np.less)]))
 
 f.close()
+
+
+##### Q4 #####
+
+dt = 5.*365.242*Days
+samples = np.random.random_sample(size=100)*dt
+
+Gobs=HD80606b.calcObs(samples)
+
+
