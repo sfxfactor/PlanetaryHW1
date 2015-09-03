@@ -39,7 +39,7 @@ Rvs=obs[6]
 
 plt.clf()
 plt.plot(JDs ,Rvs/100.)
-plt.xlabel("Julain date [days]")
+plt.xlabel("Julian date [days]")
 plt.ylabel("Radial Velocity [m/s]")
 plt.title("HD 80606 b")
 plt.savefig("Q2.pdf")
@@ -70,9 +70,64 @@ f.close()
 
 ##### Q4 #####
 
+paralax=0.01713 #arcsec \pm 0.00577
+D=1./paralax #distance in PC
+
 dt = 5.*365.242*Day
-samples = np.random.random_sample(size=100)*dt
+samples = np.random.random_sample(size=100)*dt 
+samples = np.sort(samples)
+epochs = samples + 2456863.5*Day #July 25 2014 Gaia's first science day
 
-Gobs=HD80606b.calcObs(samples)
+Gobs=HD80606b.calcObs(epochs)
+Rcm, PAcm = Gobs[2], Gobs[3]
+DRA, DDEC = (Rcm/(AU*D))*[-np.cos(PAcm),np.sin(PAcm)]*1000.
 
+plt.clf()
+f, axarr = plt.subplots(2, sharex=True)
+axarr[0].plot(epochs/Day,DRA)
+axarr[0].set_title('Reflex motion')
+axarr[1].plot(epochs/Day,DDEC)
+plt.xlabel("Julian date [days]")
+plt.savefig("1time.pdf")
 
+plt.clf()
+plt.plot(DRA,DDEC,'kx')
+plt.title('Reflex motion')
+plt.xlabel("RA []")
+plt.ylabel("DEC []")
+plt.savefig('1radec.pdf')
+
+'''
+plt.clf()
+f, axarr = plt.subplots(2, sharex=True)
+axarr[0].plot(epochs/Day,y)
+axarr[0].set_title('Reflex + parallax motion')
+axarr[1].plot(epochs/Day,y)
+plt.xlabel("Julian date [days]")
+plt.savefig("2time.pdf")
+
+plt.clf()
+plt.plot(ra,dec)
+plt.title('Reflex + parallax motion')
+plt.xlabel("RA []")
+plt.ylabel("DEC []")
+plt.savefig('2radec.pdf')
+'''
+
+DRA = DRA + 46.98*samples/(365.242*Day)
+DDEC = DDEC + 6.92*samples/(365.242*Day)
+
+plt.clf()
+f, axarr = plt.subplots(2, sharex=True)
+axarr[0].plot(epochs/Day,DRA)
+axarr[0].set_title('Reflex + parallax + proper motion')
+axarr[1].plot(epochs/Day,DDEC)
+plt.xlabel("Julian date [days]")
+plt.savefig("3time.pdf")
+
+plt.clf()
+plt.plot(DRA,DDEC,'kx')
+plt.title('Reflex + parallax + proper motion')
+plt.xlabel("RA []")
+plt.ylabel("DEC []")
+plt.savefig('3radec.pdf')
