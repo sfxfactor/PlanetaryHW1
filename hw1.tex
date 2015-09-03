@@ -29,7 +29,7 @@ Code for my model can be found at \url{https://github.com/sfxfactor/PlanetaryHW1
 
 \section{Question 2}
 
-Orbital parameters of HD 80606 b from the literature are presented in Table \ref{tab:orbparams} along with sources. A plot of stellar radial velocity (RV) versus time spanning August 1 to December 31, 2015 (JD 2457235.5 to 2457387.5) is shown in Figure \ref{fig:RV}. The maximum and minum RV's occur on the nights of October 16 and 18.
+Orbital parameters of HD 80606 b from the literature are presented in Table \ref{tab:orbparams} along with sources. A plot of stellar radial velocity (RV) versus time spanning August 1 to December 31, 2015 (JD 2457235.5 to 2457387.5) is shown in Figure \ref{fig:RV}. The maximum and minum RV's occur on October 31 at 05:30 UT and November 1 at 22:35 UT.
 
 \begin{table}[h]
 \begin{center}
@@ -37,16 +37,17 @@ Orbital parameters of HD 80606 b from the literature are presented in Table \ref
     \begin {tabular}{lcl}
     \tableline\tableline
     Parameter & Value & ref \\
-    $a$ [AU] &  &  \\
-    $e$ & & \\
-    $i$ [deg] & & \\
-    $\Omega$ [deg] & & \\
-    $\omega$ [deg] & & \\
-    $t_0$ [JD] & & \\
-    $M_1$ [M$_\sun$] & & \\
-    $M_2$ [M$_\mathrm{jup}$] & & \\
+    $a$ [AU] & $0.449\pm0.006$ & (1)\\
+    $e$ & $0.9332\pm0.0008$ & (1)\\
+    $i$ [$^\circ$] & $89.32\pm0.06$ & (1)\\
+    $\Omega$ [deg] & (-19.02 or +160.98)$\pm0.45$ & (2)\\
+    $\omega$ [deg] & $300.80\pm0.22$& (1)\\
+    $t_0$ [JD] & $2454424.852\pm0.008$ & (1)\\
+    $M_1$ [M$_\sun$] & $0.97\pm0.04$ & (1)\\
+    $M_2$ [M$_\mathrm{jup}$] & $3.94\pm0.11$ & (1)\\
     \tableline
 \end{tabular}
+    \caption{Refrences: (1) \citet{orbparam}, (2) \citet{pol}}
 \end{center}
 \end{table}
 
@@ -60,11 +61,12 @@ Orbital parameters of HD 80606 b from the literature are presented in Table \ref
 
 \section{Question 3}
 
-HD 80606 was observed by the Hipparcos satalite to have a paralax of ------ mas, corresponding to a distance of -----. As HD 80606 is a G5V we can approximate its radius as 1 $R_\sun$. The radius of the planet is $0.921\pm0.036$ $M_\mathrm{jup}$. With this information we can calculate the projected seperation of the planet and star which would result in a transit. 
+HD 80606 was observed by the Hipparcos satalite to have a paralax of $17\pm6$ mas, corresponding to a distance of $60\pm20$ pc. HD 80606 has a radius of $0.978\pm0.015 R_\sun$ \citep{orbparam}. The radius of the planet is $0.98\pm0.03 R_\mathrm{jup}$ \citep{orbparam}. With this information we can calculate the projected seperation of the planet and star which would result in a transit. First and fourth contact occur when the projected seperation is equal to the sum of the radii. 
 
 \section{Question 4}
 
-
+\bibliographystyle{apj}
+\bibliography{sources}
 
 %\subsection{}
 
