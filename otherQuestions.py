@@ -70,7 +70,7 @@ f.close()
 
 ##### Q4 #####
 
-dt = 5.*365.242*Days
+dt = 5.*365.242*Day
 samples = np.random.random_sample(size=100)*dt
 
 Gobs=HD80606b.calcObs(samples)
