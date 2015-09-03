@@ -73,7 +73,7 @@ f.close()
 paralax=0.01713 #arcsec \pm 0.00577
 D=1./paralax #distance in PC
 
-dt = 5.*365.242*Day
+dt = 5.*365.256*Day
 samples = np.random.random_sample(size=100)*dt 
 samples = np.sort(samples)
 epochs = samples + 2456863.5*Day #July 25 2014 Gaia's first science day
@@ -114,8 +114,8 @@ plt.ylabel("DEC []")
 plt.savefig('2radec.pdf')
 '''
 
-DRA = DRA + 46.98*samples/(365.242*Day)
-DDEC = DDEC + 6.92*samples/(365.242*Day)
+DRA = DRA + 46.98*samples/(365.256*Day)
+DDEC = DDEC + 6.92*samples/(365.256*Day)
 
 plt.clf()
 f, axarr = plt.subplots(2, sharex=True)
