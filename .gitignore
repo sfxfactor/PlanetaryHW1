@@ -1,3 +1,6 @@
+## for the moment ignore pdf files as they are created by other code and may not be up to date
+*.pdf
+
 ## temp files
 *~
 
