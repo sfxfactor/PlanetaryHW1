@@ -24,54 +24,15 @@ w = np.radians(300.80)
 m1 = 0.97 * Msun
 m2 = 3.94 * Mjup
 
-t1 = 2457235.5 #JD of Sep 1 2015 
-t2 = 2457387.5 #JD of Dec 31 2015
-
-#calculate range of time in seconds
-JDs = np.arange(t1,t2,0.001)
-ts = JDs*Day
-
 p=[t0,a,e,i,W,w,m1,m2]
 HD80606b=Orbit(p)
-obs=HD80606b.calcObs(ts)
-Rvs=obs[6]
-#Rvs=np.append(Rvs,Rv)
-
-plt.clf()
-plt.plot(JDs ,Rvs/100.)
-plt.xlabel("Julian date [days]")
-plt.ylabel("Radial Velocity [m/s]")
-plt.title("HD 80606 b")
-plt.savefig("Q2.pdf")
-
-f = open('results.out','w')
-f.write("Extreme neg vel on: {}\n".format(JDs[argrelextrema(Rvs,np.less)]))
-f.write("Extreme pos vel on: {}\n".format(JDs[argrelextrema(Rvs,np.greater)]))
-
-'''
-plt.clf()
-plt.plot(JDs ,obs[0]/AU)
-plt.xlabel("Julain date [days]")
-plt.ylabel("Projected seperation [AU]")
-plt.title("HD 80606 b")
-plt.savefig("Q3.pdf")
-'''
-
-##### Q3 #####
-f.write("minimum projected seperation on JD {}\n".format(JDs[argrelextrema(obs[0],np.less)]))
-
-rpl = 0.98*Rjup
-rs = 0.978*Rs
-f.write("1/4 contact occurs on JD {}\n".format(JDs[argrelextrema(np.abs(obs[0]-rpl-rs),np.less)]))
-f.write("2/3 Contact occurs on JD {}\n".format(JDs[argrelextrema(np.abs(obs[0]+rpl-rs),np.less)]))
-
-f.close()
-
 
 ##### Q4 #####
 
 pi=0.01713 #arcsec \pm 0.00577
 D=1./pi #distance in PC
+gp = 6.7e-6 #gaia precision in arcsec
+err = gp*np.ones(100)
 
 dt = 5.*365.256*Day
 samples = np.random.random_sample(size=100)*dt 
@@ -85,17 +46,19 @@ DRA, DDEC = (Rcm/(AU*D))*[-np.cos(PAcm),np.sin(PAcm)]
 
 plt.clf()
 f, axarr = plt.subplots(2, sharex=True)
-axarr[0].plot(JDs,DRA)
+axarr[0].errorbar(JDs,DRA*1e6,yerr=err*1e6,fmt='k--')
 axarr[0].set_title('Reflex motion')
-axarr[1].plot(JDs,DDEC)
+axarr[0].set_ylabel(r"$\Delta\alpha$ [$\mu as$]")
+axarr[1].errorbar(JDs,DDEC*1e6,yerr=err*1e6,fmt='k--')
+axarr[1].set_ylabel(r"$\Delta\delta$ [$\mu as$]")
 plt.xlabel("Julian date [days]")
 plt.savefig("1time.pdf")
 
 plt.clf()
-plt.plot(DRA,DDEC,'kx')
+plt.errorbar(DRA*1e6,DDEC*1e6,xerr=err*1e6,yerr=err*1e6,fmt='k.')
 plt.title('Reflex motion')
-plt.xlabel("RA []")
-plt.ylabel("DEC []")
+plt.xlabel(r"$\Delta\alpha$ [$\mu as$]")
+plt.ylabel(r"$\Delta\delta$ [$\mu as$]")
 plt.savefig('1radec.pdf')
 
 a = np.radians((9+22./60.+37.568/3600.)*15.)
@@ -111,17 +74,19 @@ DDEC = DDEC - pi*(np.cos(e)*np.sin(a)*np.sin(d)-np.sin(e)*np.cos(d))-pi*np.cos(a
 
 plt.clf()
 f, axarr = plt.subplots(2, sharex=True)
-axarr[0].plot(JDs,DRA)
+axarr[0].errorbar(JDs,DRA*1000.,yerr=err*1000.,fmt='k.')
+axarr[0].set_ylabel(r"$\Delta\alpha$ [mas]")
 axarr[0].set_title('Reflex + parallax motion')
-axarr[1].plot(JDs,DDEC)
+axarr[1].errorbar(JDs,DDEC*1000.,yerr=err*1000.,fmt='k.')
+axarr[1].set_ylabel(r"$\Delta\delta$ [mas]")
 plt.xlabel("Julian date [days]")
 plt.savefig("2time.pdf")
 
 plt.clf()
-plt.plot(DRA,DDEC)
+plt.errorbar(DRA*1000.,DDEC*1000.,xerr=err*1000.,yerr=err*1000.,fmt='k.')
 plt.title('Reflex + parallax motion')
-plt.xlabel("RA []")
-plt.ylabel("DEC []")
+plt.xlabel(r"$\Delta\alpha$ [mas]")
+plt.ylabel(r"$\Delta\delta$ [mas]")
 plt.savefig('2radec.pdf')
 
 DRA = DRA + 0.04698*samples/(365.256*Day)
@@ -129,15 +94,17 @@ DDEC = DDEC + 0.00692*samples/(365.256*Day)
 
 plt.clf()
 f, axarr = plt.subplots(2, sharex=True)
-axarr[0].plot(JDs,DRA)
+axarr[0].errorbar(JDs,DRA*1000.,yerr=err*1000.,fmt='k.')
+axarr[0].set_ylabel(r"$\Delta\alpha$ [mas]")
 axarr[0].set_title('Reflex + parallax + proper motion')
-axarr[1].plot(JDs,DDEC)
+axarr[1].errorbar(JDs,DDEC*1000.,yerr=err*1000.,fmt='k.')
+axarr[1].set_ylabel(r"$\Delta\delta$ [mas]")
 plt.xlabel("Julian date [days]")
 plt.savefig("3time.pdf")
 
 plt.clf()
-plt.plot(DRA,DDEC,'kx')
+plt.errorbar(DRA*1000.,DDEC*1000.,xerr=err*1000.,yerr=err*1000.,fmt='k.')
 plt.title('Reflex + parallax + proper motion')
-plt.xlabel("RA []")
-plt.ylabel("DEC []")
+plt.xlabel(r"$\Delta\alpha$ [mas]")
+plt.ylabel(r"$\Delta\delta$ [mas]")
 plt.savefig('3radec.pdf')
