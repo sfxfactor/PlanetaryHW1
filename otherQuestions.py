@@ -70,23 +70,24 @@ f.close()
 
 ##### Q4 #####
 
-paralax=0.01713 #arcsec \pm 0.00577
-D=1./paralax #distance in PC
+pi=0.01713 #arcsec \pm 0.00577
+D=1./pi #distance in PC
 
 dt = 5.*365.256*Day
 samples = np.random.random_sample(size=100)*dt 
 samples = np.sort(samples)
 epochs = samples + 2456863.5*Day #July 25 2014 Gaia's first science day
+JDs = epochs/Day
 
 Gobs=HD80606b.calcObs(epochs)
-Rcm, PAcm = Gobs[2], Gobs[3]
-DRA, DDEC = (Rcm/(AU*D))*[-np.cos(PAcm),np.sin(PAcm)]*1000.
+Rcm, PAcm = [Gobs[2], Gobs[3]]
+DRA, DDEC = (Rcm/(AU*D))*[-np.cos(PAcm),np.sin(PAcm)]
 
 plt.clf()
 f, axarr = plt.subplots(2, sharex=True)
-axarr[0].plot(epochs/Day,DRA)
+axarr[0].plot(JDs,DRA)
 axarr[0].set_title('Reflex motion')
-axarr[1].plot(epochs/Day,DDEC)
+axarr[1].plot(JDs,DDEC)
 plt.xlabel("Julian date [days]")
 plt.savefig("1time.pdf")
 
@@ -97,31 +98,40 @@ plt.xlabel("RA []")
 plt.ylabel("DEC []")
 plt.savefig('1radec.pdf')
 
-'''
+a = np.radians((9+22./60.+37.568/3600.)*15.)
+d = np.radians(50+36./60.+13.48/3600.)
+e = np.radians(23.44)
+n = JDs - 2451545.
+L = (280.46 + 0.9856474*n) % 360.
+g = np.radians(357.528 + 0.9856003*n) % (2.*np.pi)
+theta = np.radians(L + 1.915*np.sin(g) + 0.020*np.sin(2.*g))
+
+DRA = DRA - pi*(np.cos(theta)*np.sin(a)-np.sin(theta)*np.cos(e)*np.cos(a))*np.sin(d)
+DDEC = DDEC - pi*(np.cos(e)*np.sin(a)*np.sin(d)-np.sin(e)*np.cos(d))-pi*np.cos(a)*np.sin(d)*np.cos(theta)
+
 plt.clf()
 f, axarr = plt.subplots(2, sharex=True)
-axarr[0].plot(epochs/Day,y)
+axarr[0].plot(JDs,DRA)
 axarr[0].set_title('Reflex + parallax motion')
-axarr[1].plot(epochs/Day,y)
+axarr[1].plot(JDs,DDEC)
 plt.xlabel("Julian date [days]")
 plt.savefig("2time.pdf")
 
 plt.clf()
-plt.plot(ra,dec)
+plt.plot(DRA,DDEC)
 plt.title('Reflex + parallax motion')
 plt.xlabel("RA []")
 plt.ylabel("DEC []")
 plt.savefig('2radec.pdf')
-'''
 
-DRA = DRA + 46.98*samples/(365.256*Day)
-DDEC = DDEC + 6.92*samples/(365.256*Day)
+DRA = DRA + 0.04698*samples/(365.256*Day)
+DDEC = DDEC + 0.00692*samples/(365.256*Day)
 
 plt.clf()
 f, axarr = plt.subplots(2, sharex=True)
-axarr[0].plot(epochs/Day,DRA)
+axarr[0].plot(JDs,DRA)
 axarr[0].set_title('Reflex + parallax + proper motion')
-axarr[1].plot(epochs/Day,DDEC)
+axarr[1].plot(JDs,DDEC)
 plt.xlabel("Julian date [days]")
 plt.savefig("3time.pdf")
 
