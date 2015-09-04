@@ -89,8 +89,8 @@ plt.xlabel(r"$\Delta\alpha$ [mas]")
 plt.ylabel(r"$\Delta\delta$ [mas]")
 plt.savefig('2radec.pdf')
 
-DRA = DRA + 0.04698*samples/(365.256*Day)
-DDEC = DDEC + 0.00692*samples/(365.256*Day)
+DRA = DRA + 0.04698*n/365.24
+DDEC = DDEC + 0.00692*n/365.24
 
 plt.clf()
 f, axarr = plt.subplots(2, sharex=True)
