@@ -44,12 +44,18 @@ Gobs=HD80606b.calcObs(epochs)
 Rcm, PAcm = [Gobs[2], Gobs[3]]
 DRA, DDEC = (Rcm/(AU*D))*[-np.cos(PAcm),np.sin(PAcm)]
 
+## Gaussian random noise
+RAnoise = np.random.normal(loc=0.0, scale=gp, size=100)
+DECnoise = np.random.normal(loc=0.0, scale=gp, size=100)
+DRA += RAnoise
+DDEC += DECnoise
+
 plt.clf()
 f, axarr = plt.subplots(2, sharex=True)
-axarr[0].errorbar(JDs,DRA*1e6,yerr=err*1e6,fmt='k--')
+axarr[0].errorbar(JDs,DRA*1e6,yerr=err*1e6,fmt='k.')
 axarr[0].set_title('Reflex motion')
 axarr[0].set_ylabel(r"$\Delta\alpha$ [$\mu as$]")
-axarr[1].errorbar(JDs,DDEC*1e6,yerr=err*1e6,fmt='k--')
+axarr[1].errorbar(JDs,DDEC*1e6,yerr=err*1e6,fmt='k.')
 axarr[1].set_ylabel(r"$\Delta\delta$ [$\mu as$]")
 plt.xlabel("Julian date [days]")
 plt.savefig("1time.pdf")

@@ -19,7 +19,7 @@
 
 \title{Planetary Astrophysics: \\ Homework 1}
 \author{Samuel Factor}
-%\date{\today}           % Activate to display a given date or no date
+\date{\today}           % Activate to display a given date or no date
 
 \begin{document}
 \maketitle
@@ -29,7 +29,7 @@ Code for my model can be found at \url{https://github.com/sfxfactor/PlanetaryHW1
 
 \section{Question 2}
 
-Orbital parameters of HD 80606 b from the literature are presented in Table \ref{tab:orbparams} along with sources. A plot of stellar radial velocity (RV) versus time spanning August 1 to December 31, 2015 (JD 2457235.5 to 2457387.5) is shown in Figure \ref{fig:RV}. The maximum and minum RV's occur on October 31 at 05:30 UT (JD 2457326.729) and November 1 at 22:35 UT (JD 2457328.441).
+Orbital parameters of HD 80606 b from the literature are presented in Table \ref{tab:orbparams} along with sources. A plot of stellar radial velocity (RV) versus time spanning August 1 to December 31, 2015 (JD 2457235.5 to 2457387.5) is shown in Figure \ref{fig:RV}. The maximum and minum RV's occur on October 31 at 00:30 CDT (05:30 UT, JD 2457326.729) and November 1 at 16:35 CST (22:35 UT, JD 2457328.441).
 
 \begin{table}[h]
 \begin{center}
@@ -40,8 +40,8 @@ Orbital parameters of HD 80606 b from the literature are presented in Table \ref
     $a$ [AU] & $0.449\pm0.006$ & (1)\\
     $e$ & $0.9332\pm0.0008$ & (1)\\
     $i$ [$^\circ$] & $89.32\pm0.06$ & (1)\\
-    $\Omega$ [deg] & (-19.02 or +160.98)$\pm0.45$ & (2)\\
-    $\omega$ [deg] & $300.80\pm0.22$& (1)\\
+    $\Omega$ [$^\circ$] & (-19.02 or +160.98)$\pm0.45$ & (2)\\
+    $\omega$ [$^\circ$] & $300.80\pm0.22$& (1)\\
     $t_0$ [JD] & $2454424.852\pm0.008$ & (1)\\
     $M_1$ [M$_\sun$] & $0.97\pm0.04$ & (1)\\
     $M_2$ [M$_\mathrm{jup}$] & $3.94\pm0.11$ & (1)\\
@@ -54,20 +54,19 @@ Orbital parameters of HD 80606 b from the literature are presented in Table \ref
 \begin{figure}[h]
 \begin{center}
     \includegraphics[width=\textwidth]{Q2.pdf}
-    \caption{Radial velocity plot for HD 80606 b from August 1 to December 31, 2015}
+    \caption{Radial velocity for HD 80606 b from August 1 to December 31, 2015}
     \label{fig:RV}
 \end{center}
 \end{figure}
 
 \section{Question 3}
 
-HD 80606 has a radius of $0.978\pm0.015 R_\sun$ \citep{orbparam}. The radius of the planet is $0.98\pm0.03 R_\mathrm{jup}$ \citep{orbparam}. With this information we can calculate when the projected seperation of the planet and star would result in a transit. First and fourth contact occur when the projected seperation is equal to the sum of the radii. The first transit occurs on November 1 12:03-13:56 UT (JD 2457328.002-2457328.081) and the second occurs on November 7 02:51-15:20 UT (JD 2457333.691-2457334.139). The first transit occurs from 6-8 am which would not be observable. The second occurs from 9pm to 9am which would be visible from McDonald. Though the fact that the altitude of HD 80606 does not get above $30^\circ$ unitl about 2 am and the sun rises much before 9 am means that the data will be limited. Second contact occurs at 23:24 and third occurs just before 07:00 which means we will not be able to observe ingress/egress.
+HD 80606 has a radius of $0.978\pm0.015 R_\sun$ \citep{orbparam}. The radius of the planet is $0.98\pm0.03 R_\mathrm{jup}$ \citep{orbparam}. With this information we can calculate when the projected seperation of the planet and star would result in a transit. First and fourth contact occur when the projected seperation is equal to the sum of the radii. The first transit occurs on November 1 12:03-13:56 UT (JD 2457328.002-2457328.081) and the second occurs on November 7 02:51-15:20 UT (JD 2457333.691-2457334.139). The first transit occurs from 6-8 am CDT which would not be observable. The second occurs from 9pm to 9am which would be visible from McDonald. Though the fact that the altitude of HD 80606 does not get above $30^\circ$ unitl about 2 am and the sun rises much before 9 am means that the data will be limited. Second contact occurs at 23:24 CDT and third occurs just before 07:00 CDT which means we will not be able to observe ingress/egress.
 
 \section{Question 4}
 
-The end-of-mission sky-average astrometric performance for a bright G2V star is 6.7 $\mu$as \citep{gaia}. 
-HD 80606 was observed by the Hipparcos satalite to have a paralax of $17\pm6$ mas, corresponding to a distance of $60\pm20$ pc. 
-The parallactic motion was calculated using equations from \citet{parallax}.
+Figures \ref{fig:1radec} and \ref{fig:1time} show the reflex motion of HD 80606 due to the planet's influence on the star. The data are 100 observations over 5 years with gaussian noise added in according to Gaia's end-of-mission sky-average astrometric performance for a bright G2V star of 6.7 $\mu$as \citep{gaia}. 
+Figures \ref{fig:2radec} and \ref{fig:2time} show the previously discussed motion, plus the parallax motion. HD 80606 was observed by the Hipparcos satalite to have a paralax of $17\pm6$ mas, corresponding to a distance of $60\pm20$ pc. The parallactic motion was calculated using equations from \citet{parallax}. Figures \ref{fig:2radec} and \ref{fig:2time} show the previously discussed motion plus the propper motion. The proper motion of HD 80606, measured by Hipparcos, is 46.98 (6.92) mas/yr in RA (DEC).
 
 \begin{figure}
 \begin{center}
