@@ -43,7 +43,7 @@ plt.plot(JDs ,Rvs/100.)
 plt.xlabel("Julian date [days]")
 plt.ylabel("Radial Velocity [m/s]")
 plt.title("HD 80606 b")
-plt.savefig("Q2.pdf")
+plt.savefig("RVs.pdf")
 
 #write file with important values
 f = open('results.out','w')
