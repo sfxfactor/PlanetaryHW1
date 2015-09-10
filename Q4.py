@@ -82,42 +82,57 @@ n = JDs - 2451545.
 L = (280.46 + 0.9856474*n) % 360.
 g = np.radians(357.528 + 0.9856003*n) % (2.*np.pi)
 theta = np.radians(L + 1.915*np.sin(g) + 0.020*np.sin(2.*g))
+an = alltimesJDs - 2451545.
+aL = (280.46 + 0.9856474*an) % 360.
+ag = np.radians(357.528 + 0.9856003*an) % (2.*np.pi)
+atheta = np.radians(aL + 1.915*np.sin(ag) + 0.020*np.sin(2.*ag))
 
-DRA = DRA - pi*(np.cos(theta)*np.sin(a)-np.sin(theta)*np.cos(e)*np.cos(a))*np.sin(d)
-DDEC = DDEC - pi*(np.cos(e)*np.sin(a)*np.sin(d)-np.sin(e)*np.cos(d))-pi*np.cos(a)*np.sin(d)*np.cos(theta)
+GDRA = GDRA - pi*(np.cos(theta)*np.sin(a)-np.sin(theta)*np.cos(e)*np.cos(a))*np.sin(d)
+GDDEC = GDDEC - pi*(np.cos(e)*np.sin(a)*np.sin(d)-np.sin(e)*np.cos(d))-pi*np.cos(a)*np.sin(d)*np.cos(theta)
+
+DRA = DRA - pi*(np.cos(atheta)*np.sin(a)-np.sin(atheta)*np.cos(e)*np.cos(a))*np.sin(d)
+DDEC = DDEC - pi*(np.cos(e)*np.sin(a)*np.sin(d)-np.sin(e)*np.cos(d))-pi*np.cos(a)*np.sin(d)*np.cos(atheta)
 
 plt.clf()
 f, axarr = plt.subplots(2, sharex=True)
-axarr[0].errorbar(JDs,DRA*1000.,yerr=err*1000.,fmt='k.')
+axarr[0].plot(JDs,GDRA*1000.,'k.')
+axarr[0].plot(alltimesJDs,DRA*1000.)
 axarr[0].set_ylabel(r"$\Delta\alpha$ [mas]")
 axarr[0].set_title('Reflex + parallax motion')
-axarr[1].errorbar(JDs,DDEC*1000.,yerr=err*1000.,fmt='k.')
+axarr[1].plot(JDs,GDDEC*1000.,'k.')
+axarr[1].plot(alltimesJDs,DDEC*1000.)
 axarr[1].set_ylabel(r"$\Delta\delta$ [mas]")
 plt.xlabel("Julian date [days]")
 plt.savefig("2time.pdf")
 
 plt.clf()
-plt.errorbar(DRA*1000.,DDEC*1000.,xerr=err*1000.,yerr=err*1000.,fmt='k.')
+plt.plot(GDRA*1000.,GDDEC*1000.,'k.')
+plt.plot(DRA*1000.,DDEC*1000.)
 plt.title('Reflex + parallax motion')
 plt.xlabel(r"$\Delta\alpha$ [mas]")
 plt.ylabel(r"$\Delta\delta$ [mas]")
 plt.savefig('2radec.pdf')
 
-DRA = DRA + 0.04698*n/365.24
-DDEC = DDEC + 0.00692*n/365.24
+GDRA = GDRA + 0.04698*n/365.24
+GDDEC = GDDEC + 0.00692*n/365.24
+DRA = DRA + 0.04698*an/365.24
+DDEC = DDEC + 0.00692*an/365.24
 
 plt.clf()
 f, axarr = plt.subplots(2, sharex=True)
-axarr[0].errorbar(JDs,DRA*1000.,yerr=err*1000.,fmt='k.')
+axarr[0].plot(JDs,GDRA*1000.,'k.')
+axarr[0].plot(alltimesJDs,DRA*1000.)
 axarr[0].set_ylabel(r"$\Delta\alpha$ [mas]")
 axarr[0].set_title('Reflex + parallax + proper motion')
-axarr[1].errorbar(JDs,DDEC*1000.,yerr=err*1000.,fmt='k.')
+axarr[1].plot(JDs,GDDEC*1000.,'k.')
+axarr[1].plot(alltimesJDs,DDEC*1000.)
 axarr[1].set_ylabel(r"$\Delta\delta$ [mas]")
 plt.xlabel("Julian date [days]")
 plt.savefig("3time.pdf")
 
 plt.clf()
-plt.errorbar(DRA*1000.,DDEC*1000.,xerr=err*1000.,yerr=err*1000.,fmt='k.')
+plt.plot(GDRA*1000.,GDDEC*1000.,'k.')
+plt.plot(DRA*1000.,DDEC*1000.)
 plt.title('Reflex + parallax + proper motion')
 plt.xlabel(r"$\Delta\alpha$ [mas]")
 plt.ylabel(r"$\Delta\delta$ [mas]")
