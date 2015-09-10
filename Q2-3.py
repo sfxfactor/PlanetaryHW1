@@ -12,8 +12,7 @@ Rs = 6.9599e10 #radius of sun in cm
 
 #####Q2
 
-# HD 80606 b orbit parameters from http://exoplanet.eu/catalog/hd_80606_b/#6832
-# updated Aug. 16, 2014
+# HD 80606 b orbit parameters
 
 t0 = 2454424.852*Day #JD
 a = 0.449 * AU
@@ -31,12 +30,14 @@ t2 = 2457387.5 #JD of Dec 31 2015
 JDs = np.arange(t1,t2,0.001)
 ts = JDs*Day
 
+#generate model
 p=[t0,a,e,i,W,w,m1,m2]
 HD80606b=Orbit(p)
 obs=HD80606b.calcObs(ts)
 Rvs=obs[6]
 #Rvs=np.append(Rvs,Rv)
 
+#plot RV
 plt.clf()
 plt.plot(JDs ,Rvs/100.)
 plt.xlabel("Julian date [days]")
@@ -44,6 +45,7 @@ plt.ylabel("Radial Velocity [m/s]")
 plt.title("HD 80606 b")
 plt.savefig("Q2.pdf")
 
+#write file with important values
 f = open('results.out','w')
 f.write("Extreme neg vel on: {}\n".format(JDs[argrelextrema(Rvs,np.less)]))
 f.write("Extreme pos vel on: {}\n".format(JDs[argrelextrema(Rvs,np.greater)]))

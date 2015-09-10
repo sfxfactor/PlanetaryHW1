@@ -12,8 +12,7 @@ Rs = 6.9599e10 #radius of sun in cm
 
 #####Q2
 
-# HD 80606 b orbit parameters from http://exoplanet.eu/catalog/hd_80606_b/#6832
-# updated Aug. 16, 2014
+# HD 80606 b orbit parameters
 
 t0 = 2454424.852*Day #JD
 a = 0.449 * AU
@@ -24,6 +23,7 @@ w = np.radians(300.80)
 m1 = 0.97 * Msun
 m2 = 3.94 * Mjup
 
+#generate model
 p=[t0,a,e,i,W,w,m1,m2]
 HD80606b=Orbit(p)
 
@@ -34,14 +34,15 @@ D=1./pi #distance in PC
 gp = 6.7e-6 #gaia precision in arcsec
 err = gp*np.ones(100)
 
-dt = 5.*365.256*Day
+dt = 5.*365.256*Day #time window in seconds
 samples = np.random.random_sample(size=100)*dt 
-samples = np.sort(samples)
-alltimes = np.linspace(0.,1.,num=1000)*dt + 2456863.5*Day
+samples = np.sort(samples) #100 randomly sampled times
+alltimes = np.linspace(0.,1.,num=1000)*dt + 2456863.5*Day #finer resolution for true values
 alltimesJDs = alltimes/Day
-epochs = samples + 2456863.5*Day #July 25 2014 Gaia's first science day
+epochs = samples + 2456863.5*Day #shift begining of observations to July 25 2014 Gaia's first science day
 JDs = epochs/Day
 
+#calculate observables
 Gobs=HD80606b.calcObs(epochs)
 obs=HD80606b.calcObs(alltimes)
 GRcm, GPAcm = [Gobs[2], Gobs[3]]
@@ -49,12 +50,13 @@ Rcm, PAcm = [obs[2], obs[3]]
 GDRA, GDDEC = (GRcm/(AU*D))*[-np.cos(GPAcm),np.sin(GPAcm)]
 DRA, DDEC = (Rcm/(AU*D))*[-np.cos(PAcm),np.sin(PAcm)]
 
-## Gaussian random noise
+# Gaussian random noise
 GRAnoise = np.random.normal(loc=0.0, scale=gp, size=100)
 GDECnoise = np.random.normal(loc=0.0, scale=gp, size=100)
 GDRA += GRAnoise
 GDDEC += GDECnoise
 
+#plot reflex motion
 plt.clf()
 f, axarr = plt.subplots(2, sharex=True)
 axarr[0].errorbar(JDs,GDRA*1e6,yerr=err*1e6,fmt='k.')
@@ -75,18 +77,23 @@ plt.xlabel(r"$\Delta\alpha$ [$\mu as$]")
 plt.ylabel(r"$\Delta\delta$ [$\mu as$]")
 plt.savefig('1radec.pdf')
 
-a = np.radians((9+22./60.+37.568/3600.)*15.)
-d = np.radians(50+36./60.+13.48/3600.)
-e = np.radians(23.44)
-n = JDs - 2451545.
-L = (280.46 + 0.9856474*n) % 360.
-g = np.radians(357.528 + 0.9856003*n) % (2.*np.pi)
-theta = np.radians(L + 1.915*np.sin(g) + 0.020*np.sin(2.*g))
+#coordinates from hipparcos
+a = np.radians((9+22./60.+37.568/3600.)*15.) #RA
+d = np.radians(50+36./60.+13.48/3600.) #DEC
+e = np.radians(23.44) #obliquity
+
+#calculate longitude of the sun for on gaia observations
+n = JDs - 2451545. #days since J2000.0
+L = (280.46 + 0.9856474*n) % 360. #mean longitude of sun
+g = np.radians(357.528 + 0.9856003*n) % (2.*np.pi) #mean anomaly of sun
+theta = np.radians(L + 1.915*np.sin(g) + 0.020*np.sin(2.*g)) #ecliptic longitude of sun
+#same calculation for full resolution curve
 an = alltimesJDs - 2451545.
 aL = (280.46 + 0.9856474*an) % 360.
 ag = np.radians(357.528 + 0.9856003*an) % (2.*np.pi)
 atheta = np.radians(aL + 1.915*np.sin(ag) + 0.020*np.sin(2.*ag))
 
+#calculate parallactic motion
 GDRA = GDRA - pi*(np.cos(theta)*np.sin(a)-np.sin(theta)*np.cos(e)*np.cos(a))*np.sin(d)
 GDDEC = GDDEC - pi*(np.cos(e)*np.sin(a)*np.sin(d)-np.sin(e)*np.cos(d))-pi*np.cos(a)*np.sin(d)*np.cos(theta)
 
@@ -113,6 +120,7 @@ plt.xlabel(r"$\Delta\alpha$ [mas]")
 plt.ylabel(r"$\Delta\delta$ [mas]")
 plt.savefig('2radec.pdf')
 
+#add propper motion from hipparcos
 GDRA = GDRA + 0.04698*n/365.24
 GDDEC = GDDEC + 0.00692*n/365.24
 DRA = DRA + 0.04698*an/365.24
