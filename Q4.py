@@ -47,8 +47,8 @@ Gobs=HD80606b.calcObs(epochs)
 obs=HD80606b.calcObs(alltimes)
 GRcm, GPAcm = [Gobs[2], Gobs[3]]
 Rcm, PAcm = [obs[2], obs[3]]
-GDRA, GDDEC = (GRcm/(AU*D))*[-np.cos(GPAcm),np.sin(GPAcm)]
-DRA, DDEC = (Rcm/(AU*D))*[-np.cos(PAcm),np.sin(PAcm)]
+GDRA, GDDEC = (GRcm/(AU*D))*[np.sin(GPAcm),np.cos(GPAcm)]
+DRA, DDEC = (Rcm/(AU*D))*[np.sin(PAcm),np.cos(PAcm)]
 
 # Gaussian random noise
 GRAnoise = np.random.normal(loc=0.0, scale=gp, size=100)

@@ -1,25 +1,17 @@
 import numpy as np
 import sys
-'''
-def cli_progress_test(end_val, bar_length=20):
-        for i in xrange(0, end_val):
-                    percent = float(i) / end_val
-                            hashes = '#' * int(round(percent * bar_length))
-                                    spaces = ' ' * (bar_length - len(hashes))
-                                            sys.stdout.write("\rPercent: [{0}] {1}%".format(hashes + spaces, int(round(percent * 100))))
-                                                    sys.stdout.flush()
 
-                                                    '''
 class Orbit:
     G = 6.67259e-8 #Gravitational constant (cm^3/g/s^2)
 
     def __init__(self,p):
         '''
+        Creates an Orbit object
+
         :param p:
-        array of orbital parameters. [t, a, e, i, W, w, m1, m2]
-        assuming t0 = 0
+        array of orbital parameters. [t0, a, e, i, W, w, m1, m2]
         
-        ##### all angles are in radians and all other units are cgs (WHY?!?!) #####
+        ##### all angles are in radians and all other units are cgs (ARG WHY?!?!) #####
         '''
         
         #pull out orbital parameters
@@ -34,9 +26,18 @@ class Orbit:
         self.P = np.sqrt((4.*self.a**3*np.pi**2)/(Orbit.G*(self.m1+self.m2)))
 
     def get_params(self):
+        '''
+        Returns orbital parameters
+        '''
         return [self.t0,self.a,self.e,self.i,self.W,self.w,self.m1,self.m2,self.P]
 
     def calcCoord(self, t):
+        '''
+        Calculates and returns the cartesian and radial coordinates.
+
+        :param t:
+        Single time or array of times to compute the coordinates of.
+        '''
 
         M = 2*np.pi*(t-self.t0)/self.P % (2.*np.pi)
 
@@ -60,9 +61,15 @@ class Orbit:
         return [X,Y,Z,r,f,E,M]
 
     def calcObs(self, t, coords=None):
-        ''' Calculates observables from orbital parameters.
-        returns array of observables [sep, PA, R1, PA1, R2, PA2, RV].
+        ''' Calculates observables from orbital parameters. If orbital parameters are not provided, this routine calculates them from the given times. 
+        returns array of observables and coordinates (see calcCoord) [sep, PA, R1, PA1, R2, PA2, RV, coords].
         Rx and PAx are the seperation with respect to the barycenter.
+
+        :param t:
+        Single time or array of time to compute the coordinates of.
+
+        :param coords:
+        Coordinates (in same format as the output of calcCoord) of the system at the relavent times. If this parameter is provided, the given coordinates are used rather than recalculated.
         '''
 
         if coords is None:
@@ -70,7 +77,7 @@ class Orbit:
         else:
             X, Y, Z, r, f, E, M = coords
 
-        #position angle west of north
+        #position angle east of north
         PA = np.arctan2(Y,X) % (2.*np.pi)
         sep = np.sqrt(X**2+Y**2)
 
