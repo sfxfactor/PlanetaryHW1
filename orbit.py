@@ -62,8 +62,8 @@ class Orbit:
 
     def calcObs(self, t, coords=None):
         ''' Calculates observables from orbital parameters. If orbital parameters are not provided, this routine calculates them from the given times. 
-        returns array of observables and coordinates (see calcCoord) [sep, PA, R1, PA1, R2, PA2, RV, coords].
-        Rx and PAx are the seperation with respect to the barycenter.
+        returns array of observables and coordinates (see calcCoord) [sep, PA, R1, PA1, R2, PA2, RV1, RV2, coords].
+        Rx and PAx are the seperation with respect to the barycenter of object x and RVx is the radial velocity of object x.
 
         :param t:
         Single time or array of time to compute the coordinates of.
@@ -78,13 +78,13 @@ class Orbit:
             X, Y, Z, r, f, E, M = coords
 
         #position angle east of north
-        PA = np.arctan2(Y,X) % (2.*np.pi)
+        PA = np.arctan2(-Y,X) % (2.*np.pi) #+Y is west so PA is measured toward -Y
         sep = np.sqrt(X**2+Y**2)
 
         R1 = (self.m2/(self.m1+self.m2))*sep
         R2 = (self.m1/(self.m1+self.m2))*sep
 
-        PA1 = (PA + np.pi) % (2.*np.pi)
+        PA1 = (PA + np.pi) % (2.*np.pi) #PA is planet wrt star so star is +pi
         PA2 = PA
 
         RVoM = (2*np.pi*self.a*np.sin(self.i))/((self.m1+self.m2)*self.P*np.sqrt(1-self.e**2))*(np.cos(self.w+f)+self.e*np.cos(self.w))
