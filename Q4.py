@@ -77,12 +77,12 @@ plt.xlabel(r"$\Delta\alpha$ [$\mu as$]")
 plt.ylabel(r"$\Delta\delta$ [$\mu as$]")
 plt.savefig('1radec.pdf')
 
-#coordinates from hipparcos
+#J2000. coordinates
 a = np.radians((9+22./60.+37.568/3600.)*15.) #RA
 d = np.radians(50+36./60.+13.48/3600.) #DEC
 e = np.radians(23.44) #obliquity
 
-#calculate longitude of the sun for on gaia observations
+#calculate longitude of the sun for gaia observations
 n = JDs - 2451545. #days since J2000.0
 L = (280.46 + 0.9856474*n) % 360. #mean longitude of sun
 g = np.radians(357.528 + 0.9856003*n) % (2.*np.pi) #mean anomaly of sun
