@@ -31,7 +31,7 @@ HD80606b=Orbit(p)
 
 pi=0.01713 #arcsec \pm 0.00577
 D=1./pi #distance in PC
-gp = 6.7e-6 #gaia precision in arcsec
+gp = 5e-6 #gaia precision in arcsec
 err = gp*np.ones(100)
 
 dt = 5.*365.256*Day #time window in seconds
@@ -51,10 +51,13 @@ GDRA, GDDEC = (GRcm/(AU*D))*[np.sin(GPAcm),np.cos(GPAcm)]
 DRA, DDEC = (Rcm/(AU*D))*[np.sin(PAcm),np.cos(PAcm)]
 
 # Gaussian random noise
-GRAnoise = np.random.normal(loc=0.0, scale=gp, size=100)
-GDECnoise = np.random.normal(loc=0.0, scale=gp, size=100)
-GDRA += GRAnoise
-GDDEC += GDECnoise
+Gnoise = np.random.multivariate_normal([0.,0.],[[gp**2,0.],[0.,gp**2]],100) #use 2D circular gaussian for noise
+GDRA += Gnoise[:,0]
+GDDEC += Gnoise[:,1]
+#GRAnoise = np.random.normal(loc=0.0, scale=gp, size=100)
+#GDECnoise = np.random.normal(loc=0.0, scale=gp, size=100)
+#GDRA += GRAnoise
+#GDDEC += GDECnoise
 
 #plot reflex motion
 plt.clf()
