@@ -25,11 +25,11 @@
 \maketitle
 
 \section{Question 1}
-Code for my model can be found at \url{https://github.com/sfxfactor/PlanetaryHW1}. I implemented an \texttt{Orbit} object which stores the orbital parameters and the masses of the two bodies. There are then two methods associated with an \texttt{Orbit} object, \texttt{calcCoord} which, given a time or array of times, calculates the $X$, $Y$, and $Z$ coordinates along with $r$ and the 3 anomaly angles $f$, $E$ and $M$. The second method, \texttt{calcObs} calculates the observables given a time or array of times. This method returns the projected seperation and position angle of the two bodies, the projected seperation and position angle of each body with respect to the center of mass, the radial velocity of both objects as well as the coordinates returned by \texttt{calcCoord}.
+Code for my model can be found at \url{https://github.com/sfxfactor/PlanetaryHW1}. I implemented an \texttt{Orbit} object which stores the orbital parameters and the masses of the two bodies. There are then two methods associated with an \texttt{Orbit} object, \texttt{calcCoord} which, given a time or array of times, calculates the $X$, $Y$, and $Z$ coordinates along with $r$ and the 3 anomaly angles $f$, $E$ and $M$. The second method, \texttt{calcObs} calculates the observables given a time or array of times. This method returns the projected separation and position angle of the two bodies, the projected separation and position angle of each body with respect to the center of mass, the radial velocity of both objects as well as the coordinates returned by \texttt{calcCoord}.
 
 \section{Question 2}
 
-Orbital parameters of HD 80606 b from the literature are presented in Table \ref{tab:orbparams} along with sources. A plot of stellar radial velocity (RV) versus time spanning August 1 to December 31, 2015 (JD 2457235.5 to 2457387.5) is shown in Figure \ref{fig:RV}. The maximum and minum RV's occur on October~31 at 00:30 CDT (05:30 UT, JD 2457326.729) and November~1 at 16:35 CST (22:35 UT, JD 2457328.441).
+Orbital parameters of HD 80606 b from the literature are presented in Table \ref{tab:orbparams} along with sources. A plot of stellar radial velocity (RV) versus time spanning August 1 to December 31, 2015 (JD 2457235.5 to 2457387.5) is shown in Figure \ref{fig:RV}. The maximum and minim RV's occur on October~31 at 00:30 CDT (05:30 UT, JD 2457326.729) and November~1 at 16:35 CST (22:35 UT, JD 2457328.441).
 
 \begin{table}[h]
 \begin{center}
@@ -47,7 +47,7 @@ Orbital parameters of HD 80606 b from the literature are presented in Table \ref
     $M_2$ [M$_\mathrm{jup}$] & $3.94\pm0.11$ & (1)\\
     \tableline
 \end{tabular}
-    \caption{Refrences: (1) \citet{orbparam}, (2) \citet{pol}}
+    \caption{References: (1) \citet{orbparam}, (2) \citet{pol}}
 \end{center}
 \end{table}
 
@@ -61,12 +61,12 @@ Orbital parameters of HD 80606 b from the literature are presented in Table \ref
 
 \section{Question 3}
 
-HD 80606 has a radius of $0.978\pm0.015 R_\sun$ \citep{orbparam}. The radius of the planet is $0.98\pm0.03 R_\mathrm{jup}$ \citep{orbparam}. With this information we can calculate when the projected seperation of the planet and star would result in a transit. First and fourth contact occur when the projected seperation is equal to the sum of the radii. The first transit occurs on November 1 12:03-13:56 UT (JD 2457328.002-2457328.081) and the second occurs on November 7 02:51-15:20 UT (JD 2457333.691-2457334.139). The first transit occurs from 6-8 am CDT which would not be observable. The second occurs from 9pm to 9am which would be visible from McDonald. Though the fact that the altitude of HD 80606 does not get above $30^\circ$ unitl about 2 am and the sun rises much before 9 am means that the data will be limited. Second contact occurs at 23:24 CDT and third occurs just before 07:00 CDT which means we will not be able to observe ingress/egress.
+HD 80606 has a radius of $0.978\pm0.015 R_\sun$ \citep{orbparam}. The radius of the planet is $0.98\pm0.03 R_\mathrm{jup}$ \citep{orbparam}. With this information we can calculate when the projected separation of the planet and star would result in a transit. First and fourth contact occur when the projected separation is equal to the sum of the radii. The first transit occurs on November 1 12:03-13:56 UT (JD 2457328.002-2457328.081) and the second occurs on November 7 02:51-15:20 UT (JD 2457333.691-2457334.139). The first transit occurs from 6-8 am CDT which would not be observable. The second occurs from 9pm to 9am which would be visible from McDonald. Though the fact that the altitude of HD 80606 does not get above $30^\circ$ until about 2 am and the sun rises much before 9 am means that the data will be limited. Second contact occurs at 23:24 CDT and third occurs just before 07:00 CDT which means we will not be able to observe ingress/egress.
 
 \section{Question 4}
 
-Figures \ref{fig:1radec} and \ref{fig:1time} show the reflex motion of HD 80606 due to the planet's influence on the star. The data are 100 observations over 5 years with gaussian noise added in according to Gaia's end-of-mission sky-average astrometric performance for a bright G2V star of 6.7 $\mu$as \citep{gaia}. 
-Figures \ref{fig:2radec} and \ref{fig:2time} show the previously discussed motion, plus the parallax motion. HD 80606 was observed by the Hipparcos satalite to have a paralax of $17\pm6$ mas, corresponding to a distance of $60\pm20$ pc. The parallactic motion was calculated using equations from \citet{parallax} which are replicated in Equations \ref{eq:dra} and \ref{eq:ddec}. 
+Figures \ref{fig:1radec} and \ref{fig:1time} show the reflex motion of HD 80606 due to the planet's influence on the star. The data are 100 observations over 5 years with Gaussian noise added in according to Gaia's end-of-mission sky-average astrometric performance for a bright G2V star of 6.7 $\mu$as \citep{gaia}. 
+Figures \ref{fig:2radec} and \ref{fig:2time} show the previously discussed motion, plus the parallax motion. HD 80606 was observed by the Hipparcos satellite to have a parallax of $17\pm6$ mas, corresponding to a distance of $60\pm20$ pc. The parallactic motion was calculated using equations from \citet{parallax} which are replicated in Equations \ref{eq:dra} and \ref{eq:ddec}. 
 \begin{equation}
     \Delta\alpha=-\pi(\cos\theta\sin\alpha-\sin\theta\cos\varepsilon\cos\alpha)\sin\delta
     \label{eq:dra}
@@ -76,7 +76,7 @@ Figures \ref{fig:2radec} and \ref{fig:2time} show the previously discussed motio
     \label{eq:ddec}
 \end{equation}
 where $\pi$ is the parallax, $\theta$ is the longitude of the Sun seen from earth, and $\varepsilon$ is the obliquity of the ecliptic.
-Figures \ref{fig:2radec} and \ref{fig:2time} show the previously discussed motion plus the propper motion. The proper motion of HD 80606, measured by Hipparcos, is 46.98 (6.92) mas/yr in RA (DEC).
+Figures \ref{fig:2radec} and \ref{fig:2time} show the previously discussed motion plus the proper motion. The proper motion of HD 80606, measured by Hipparcos, is 46.98 (6.92) mas/yr in RA (DEC).
 
 \begin{figure}
 \begin{center}
@@ -97,7 +97,7 @@ Figures \ref{fig:2radec} and \ref{fig:2time} show the previously discussed motio
 \begin{figure}
 \begin{center}
     \includegraphics[width=\textwidth]{2radec.pdf}
-    \caption{Same as Fig. \ref{fig:1radec} but also accounting for motion due toparallax. Error bars are smaller than the data point.}
+    \caption{Same as Fig. \ref{fig:1radec} but also accounting for motion due to parallax. Error bars are smaller than the data point.}
     \label{fig:2radec}
 \end{center}
 \end{figure}
@@ -113,7 +113,7 @@ Figures \ref{fig:2radec} and \ref{fig:2time} show the previously discussed motio
 \begin{figure}
 \begin{center}
     \includegraphics[width=\textwidth]{3radec.pdf}
-    \caption{Same as Fig \ref{fig:2radec} but also accounting for propper motion. Offsets are now from J2000.0 coordinates (9h22m37.568s +50$^\circ$36'13.48") . Error bars are smaller than the data point.}
+    \caption{Same as Fig \ref{fig:2radec} but also accounting for proper motion. Offsets are now from J2000.0 coordinates (9h22m37.568s +50$^\circ$36'13.48") . Error bars are smaller than the data point.}
     \label{fig:3radec}
 \end{center}
 \end{figure}
@@ -121,7 +121,7 @@ Figures \ref{fig:2radec} and \ref{fig:2time} show the previously discussed motio
 \begin{figure}
 \begin{center}
     \includegraphics[width=\textwidth]{3time.pdf}
-    \caption{Same as Fig \ref{fig:2time} but also accounting for propper motion. Offsets are now from J2000.0 coordinates (9h22m37.568s +50$^\circ$36'13.48") . Error bars are smaller than the data point.}
+    \caption{Same as Fig \ref{fig:2time} but also accounting for proper motion. Offsets are now from J2000.0 coordinates (9h22m37.568s +50$^\circ$36'13.48") . Error bars are smaller than the data point.}
     \label{fig:3time}
 \end{center}
 \end{figure}
