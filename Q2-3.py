@@ -64,9 +64,10 @@ f.write("minimum projected seperation on JD {}\n".format(JDs[argrelextrema(obs[0
 
 rpl = 0.98*Rjup
 rs = 0.978*Rs
+
+#write time of contact- when the seperation is less than the sum/dif of the radii
 f.write("1/4 contact occurs on JD {}\n".format(JDs[argrelextrema(np.abs(obs[0]-rpl-rs),np.less)]))
 f.write("2/3 Contact occurs on JD {}\n".format(JDs[argrelextrema(np.abs(obs[0]+rpl-rs),np.less)]))
-
 f.close()
 
 
